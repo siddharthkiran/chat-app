@@ -2,34 +2,28 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title> </title>
-    <link rel="stylesheet" href="/css/style.css">
+    <meta name="viewport" content="width = device-width ,initial-scale=1, user-scalable=no" >
+    <title>join | chatapp</title>
+      <link rel="stylesheet" href="/css/style.css">
   </head>
-
-  <body class="chat">
-
-  <div class="chat__sidebar">
-    <h3>People</h3>
-    <div class=""></div>
-  </div>
-
-  <div class="chat__main">
-    <ol id = 'messages'class="chat__messages">
-    </ol>
-
-  <div class="chat__footer">
-    <form id="message-form">
-      <input name="message" type = "text" placeholder="typemesg" autofocus autocomplete="off"/>
-      <button  name="button">send</button>
-
-    </form>
-    <button type="button" id = "send-location"> geolocation</button>
-  </div>
-
-  </div>
-
-    <script type="text/javascript" src = "/socket.io/socket.io.js">  </script>
-    <script src = "/js/libs/jquery-3.2.1.min.js">  </script>
-    <script type="text/javascript" src = "/js/index.js">  </script>
+  <body class="centered-form">
+    <div class="centered-form__form">
+<form action = '/chat.html'>
+      <div class="form-field">
+          <h3>join a chat</h3>
+      </div>
+      <div class="form-field">
+          <label >Display Name</label>
+          <input type="text" name="name" value="" autofocus>
+      </div>
+      <div class="form-field">
+          <label>Room number</label>
+          <input type="text" name="room" value="">
+      </div>
+      <div class="form-field">
+          <button type="submit"> Login</button>
+      </div>
+</form>
+    </div>
   </body>
 </html>
