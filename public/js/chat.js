@@ -1,5 +1,15 @@
 var socket= io();
 socket.on('connect', () =>{
+  var params = $.deparam(window.location.search);
+  socket.emit('joins',params, function(error){
+    if(error){
+        alert(error);
+        window.location.href ='/';
+    }
+    else{
+      console.log('cool');
+    }
+  });
   console.log('connected to server');
 });
 
@@ -28,10 +38,7 @@ socket.on('newMessage',(message) =>{
 
   $('#messages').append(html);
   scrollToBottom();
-  // console.log(message);
-  // var li =$('<li></li>');
-  // li.text(`${message.from} : ${formattedTime} :${message.text}`)
-  // $('#messages').append(li);
+
 });
 
 
@@ -44,13 +51,20 @@ socket.on('locationMessage',(message) =>{
     url: message.url
   });
 
-  // var li =$('<li></li>');
-  // var url = $('<a target="_blank"> My location</a>');
-  // li.text(`${message.from} : ${formattedTime} :`);
-  // url.attr('href',message.url);
-  // li.append(url);
+
   $('#messages').append(html);
   scrollToBottom();
+});
+
+socket.on('updateUserList', function(users){
+  var ol = $('<ol></ol>');
+
+  users.forEach(function(user){
+    ol.append($('<li></li>').text(user));
+  })
+
+  $('#users').html(ol);
+  console.log('userslist' ,users);
 });
 socket.on('disconnect', () =>{
   console.log('disconnect to server');
@@ -60,7 +74,7 @@ $('#message-form').on('submit',function(e){
   e.preventDefault();
   var msgtextbox =$('[name=message]');
   socket.emit('createMessage', {
-    from: 'user',
+
     text : msgtextbox.val()
   }, function(){
   msgtextbox.val('');
